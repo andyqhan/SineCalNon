@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		92060D712639D6A9001922CC /* SineCalNonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D702639D6A9001922CC /* SineCalNonApp.swift */; };
+		92060D732639D6A9001922CC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D722639D6A9001922CC /* ContentView.swift */; };
+		92060D752639D6AC001922CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92060D742639D6AC001922CC /* Assets.xcassets */; };
+		92060D782639D6AC001922CC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92060D772639D6AC001922CC /* Preview Assets.xcassets */; };
+		92060D842639D6AD001922CC /* SineCalNonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D832639D6AD001922CC /* SineCalNonTests.swift */; };
+		92060D8F2639D6AE001922CC /* SineCalNonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		92060D802639D6AD001922CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92060D652639D6A9001922CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92060D6C2639D6A9001922CC;
+			remoteInfo = SineCalNon;
+		};
+		92060D8B2639D6AE001922CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92060D652639D6A9001922CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92060D6C2639D6A9001922CC;
+			remoteInfo = SineCalNon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		92060D6D2639D6A9001922CC /* SineCalNon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SineCalNon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92060D702639D6A9001922CC /* SineCalNonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineCalNonApp.swift; sourceTree = "<group>"; };
+		92060D722639D6A9001922CC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		92060D742639D6AC001922CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92060D772639D6AC001922CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		92060D792639D6AC001922CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92060D7A2639D6AC001922CC /* SineCalNon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SineCalNon.entitlements; sourceTree = "<group>"; };
+		92060D7F2639D6AD001922CC /* SineCalNonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SineCalNonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92060D832639D6AD001922CC /* SineCalNonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineCalNonTests.swift; sourceTree = "<group>"; };
+		92060D852639D6AD001922CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92060D8A2639D6AE001922CC /* SineCalNonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SineCalNonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineCalNonUITests.swift; sourceTree = "<group>"; };
+		92060D902639D6AE001922CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		92060D6A2639D6A9001922CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D7C2639D6AD001922CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D872639D6AE001922CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		92060D642639D6A9001922CC = {
+			isa = PBXGroup;
+			children = (
+				92060D6F2639D6A9001922CC /* SineCalNon */,
+				92060D822639D6AD001922CC /* SineCalNonTests */,
+				92060D8D2639D6AE001922CC /* SineCalNonUITests */,
+				92060D6E2639D6A9001922CC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		92060D6E2639D6A9001922CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92060D6D2639D6A9001922CC /* SineCalNon.app */,
+				92060D7F2639D6AD001922CC /* SineCalNonTests.xctest */,
+				92060D8A2639D6AE001922CC /* SineCalNonUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		92060D6F2639D6A9001922CC /* SineCalNon */ = {
+			isa = PBXGroup;
+			children = (
+				92060D702639D6A9001922CC /* SineCalNonApp.swift */,
+				92060D722639D6A9001922CC /* ContentView.swift */,
+				92060D742639D6AC001922CC /* Assets.xcassets */,
+				92060D792639D6AC001922CC /* Info.plist */,
+				92060D7A2639D6AC001922CC /* SineCalNon.entitlements */,
+				92060D762639D6AC001922CC /* Preview Content */,
+			);
+			path = SineCalNon;
+			sourceTree = "<group>";
+		};
+		92060D762639D6AC001922CC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				92060D772639D6AC001922CC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		92060D822639D6AD001922CC /* SineCalNonTests */ = {
+			isa = PBXGroup;
+			children = (
+				92060D832639D6AD001922CC /* SineCalNonTests.swift */,
+				92060D852639D6AD001922CC /* Info.plist */,
+			);
+			path = SineCalNonTests;
+			sourceTree = "<group>";
+		};
+		92060D8D2639D6AE001922CC /* SineCalNonUITests */ = {
+			isa = PBXGroup;
+			children = (
+				92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */,
+				92060D902639D6AE001922CC /* Info.plist */,
+			);
+			path = SineCalNonUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		92060D6C2639D6A9001922CC /* SineCalNon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92060D932639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNon" */;
+			buildPhases = (
+				92060D692639D6A9001922CC /* Sources */,
+				92060D6A2639D6A9001922CC /* Frameworks */,
+				92060D6B2639D6A9001922CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SineCalNon;
+			productName = SineCalNon;
+			productReference = 92060D6D2639D6A9001922CC /* SineCalNon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		92060D7E2639D6AD001922CC /* SineCalNonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92060D962639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNonTests" */;
+			buildPhases = (
+				92060D7B2639D6AD001922CC /* Sources */,
+				92060D7C2639D6AD001922CC /* Frameworks */,
+				92060D7D2639D6AD001922CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92060D812639D6AD001922CC /* PBXTargetDependency */,
+			);
+			name = SineCalNonTests;
+			productName = SineCalNonTests;
+			productReference = 92060D7F2639D6AD001922CC /* SineCalNonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		92060D892639D6AE001922CC /* SineCalNonUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92060D992639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNonUITests" */;
+			buildPhases = (
+				92060D862639D6AE001922CC /* Sources */,
+				92060D872639D6AE001922CC /* Frameworks */,
+				92060D882639D6AE001922CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92060D8C2639D6AE001922CC /* PBXTargetDependency */,
+			);
+			name = SineCalNonUITests;
+			productName = SineCalNonUITests;
+			productReference = 92060D8A2639D6AE001922CC /* SineCalNonUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		92060D652639D6A9001922CC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					92060D6C2639D6A9001922CC = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					92060D7E2639D6AD001922CC = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 92060D6C2639D6A9001922CC;
+					};
+					92060D892639D6AE001922CC = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 92060D6C2639D6A9001922CC;
+					};
+				};
+			};
+			buildConfigurationList = 92060D682639D6A9001922CC /* Build configuration list for PBXProject "SineCalNon" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 92060D642639D6A9001922CC;
+			productRefGroup = 92060D6E2639D6A9001922CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				92060D6C2639D6A9001922CC /* SineCalNon */,
+				92060D7E2639D6AD001922CC /* SineCalNonTests */,
+				92060D892639D6AE001922CC /* SineCalNonUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		92060D6B2639D6A9001922CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92060D782639D6AC001922CC /* Preview Assets.xcassets in Resources */,
+				92060D752639D6AC001922CC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D7D2639D6AD001922CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D882639D6AE001922CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		92060D692639D6A9001922CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92060D732639D6A9001922CC /* ContentView.swift in Sources */,
+				92060D712639D6A9001922CC /* SineCalNonApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D7B2639D6AD001922CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92060D842639D6AD001922CC /* SineCalNonTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92060D862639D6AE001922CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92060D8F2639D6AE001922CC /* SineCalNonUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		92060D812639D6AD001922CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92060D6C2639D6A9001922CC /* SineCalNon */;
+			targetProxy = 92060D802639D6AD001922CC /* PBXContainerItemProxy */;
+		};
+		92060D8C2639D6AE001922CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92060D6C2639D6A9001922CC /* SineCalNon */;
+			targetProxy = 92060D8B2639D6AE001922CC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		92060D912639D6AE001922CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		92060D922639D6AE001922CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		92060D942639D6AE001922CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SineCalNon/SineCalNon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SineCalNon/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = SineCalNon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		92060D952639D6AE001922CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SineCalNon/SineCalNon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"SineCalNon/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = SineCalNon/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNon;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		92060D972639D6AE001922CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SineCalNonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SineCalNon.app/Contents/MacOS/SineCalNon";
+			};
+			name = Debug;
+		};
+		92060D982639D6AE001922CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SineCalNonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SineCalNon.app/Contents/MacOS/SineCalNon";
+			};
+			name = Release;
+		};
+		92060D9A2639D6AE001922CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SineCalNonUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SineCalNon;
+			};
+			name = Debug;
+		};
+		92060D9B2639D6AE001922CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SineCalNonUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andyqhan.SineCalNonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = SineCalNon;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		92060D682639D6A9001922CC /* Build configuration list for PBXProject "SineCalNon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92060D912639D6AE001922CC /* Debug */,
+				92060D922639D6AE001922CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92060D932639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92060D942639D6AE001922CC /* Debug */,
+				92060D952639D6AE001922CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92060D962639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92060D972639D6AE001922CC /* Debug */,
+				92060D982639D6AE001922CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92060D992639D6AE001922CC /* Build configuration list for PBXNativeTarget "SineCalNonUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92060D9A2639D6AE001922CC /* Debug */,
+				92060D9B2639D6AE001922CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 92060D652639D6A9001922CC /* Project object */;
+}
