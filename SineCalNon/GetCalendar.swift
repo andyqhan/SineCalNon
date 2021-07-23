@@ -16,16 +16,29 @@ struct CalendarData {
     
     func requestAccessToCalendar() {
         //eventStore.reset()
-        eventStore.requestAccess(to: EKEntityType.event) { granted, error in
-            if let unwrappedError = error {
-                print("Error \(unwrappedError)")
-            } else if !granted {
-                print("Not granted access")
-            } else {
-                print("Granted access")
-                print("authorizationStatus: \(EKEventStore.authorizationStatus(for: EKEntityType.event))")
+        switch(EKEventStore.authorizationStatus(for: EKEntityType.event)) {
+        case EKAuthorizationStatus.authorized:
+            print("already authorized")
+        case EKAuthorizationStatus.denied:
+            print("already denied")
+        case EKAuthorizationStatus.notDetermined:
+            eventStore.requestAccess(to: EKEntityType.event) { granted, error in
+                if let unwrappedError = error {
+                    print("Error \(unwrappedError)")
+                } else if !granted {
+                    print("Not granted access")
+                } else {
+                    print("Granted access")
+                    print("authorizationStatus: \(EKEventStore.authorizationStatus(for: EKEntityType.event))")
+                }
             }
+        case EKAuthorizationStatus.restricted:
+            print("restricted")
+        @unknown default:
+            print("unknown EKAuthorizationStatus case")
         }
+        
+        
     }
     
     var sources: String {
@@ -36,8 +49,8 @@ struct CalendarData {
         //requestAccessToCalendar()
     }
     
-    mutating func loadCalendars() {
-        calendars = eventStore.calendars(for: EKEntityType.event)
+    func getCalendars() -> [EKCalendar] {
+        return eventStore.calendars(for: EKEntityType.event)
     }
     
     func getDefaultCalendarEvents() -> [EKEvent]? {
@@ -55,5 +68,15 @@ struct CalendarData {
     }
     
     var defaultCalendarEvents: [EKEvent]?
+    
+    func getEventsWithTitleRegex(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> [EKEvent]? {
+        // reg is a String and not an NSRegularExpression cause working with that is horrible. downside is that i don't get like init checking for it here — will have to do in caller
+        let evPred = eventStore.predicateForEvents(withStart: withStart, end: withEnd, calendars: calendars)
+        let matches = eventStore.events(matching: evPred)
+        // now filter for regex match
+        let filteredMatches = matches.filter { $0.title?.range(of: reg, options: .regularExpression) != nil }
+        print(filteredMatches)
+        return filteredMatches
+    }
 
 }
