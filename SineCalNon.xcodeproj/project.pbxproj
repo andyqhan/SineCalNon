@@ -13,6 +13,7 @@
 		92060D782639D6AC001922CC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92060D772639D6AC001922CC /* Preview Assets.xcassets */; };
 		92060D842639D6AD001922CC /* SineCalNonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D832639D6AD001922CC /* SineCalNonTests.swift */; };
 		92060D8F2639D6AE001922CC /* SineCalNonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */; };
+		920FC4AE2651D00900A66A9C /* GetCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920FC4AD2651D00900A66A9C /* GetCalendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		92060D8A2639D6AE001922CC /* SineCalNonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SineCalNonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineCalNonUITests.swift; sourceTree = "<group>"; };
 		92060D902639D6AE001922CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		920FC4AD2651D00900A66A9C /* GetCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCalendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			children = (
 				92060D702639D6A9001922CC /* SineCalNonApp.swift */,
 				92060D722639D6A9001922CC /* ContentView.swift */,
+				920FC4AD2651D00900A66A9C /* GetCalendar.swift */,
 				92060D742639D6AC001922CC /* Assets.xcassets */,
 				92060D792639D6AC001922CC /* Info.plist */,
 				92060D7A2639D6AC001922CC /* SineCalNon.entitlements */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92060D732639D6A9001922CC /* ContentView.swift in Sources */,
+				920FC4AE2651D00900A66A9C /* GetCalendar.swift in Sources */,
 				92060D712639D6A9001922CC /* SineCalNonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

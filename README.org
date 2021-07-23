@@ -1,0 +1,4 @@
+#+TITLE: SineCalNon
+
+* Features:
+- [ ] Simple hour counter. You put in a regex and it tells you how many hours you spent on it in the past week, month, year.
