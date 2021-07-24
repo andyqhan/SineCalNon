@@ -22,6 +22,7 @@ struct CalendarData {
         case EKAuthorizationStatus.denied:
             print("already denied")
         case EKAuthorizationStatus.notDetermined:
+            print("auth status not determined")
             eventStore.requestAccess(to: EKEntityType.event) { granted, error in
                 if let unwrappedError = error {
                     print("Error \(unwrappedError)")
