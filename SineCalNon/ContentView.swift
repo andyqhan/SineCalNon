@@ -19,6 +19,8 @@ struct ContentView: View {
     @State var searchStartDate = Date()
     @State var searchEndDate = Date()
     
+    @State var wordFreq = Dictionary<String, Int>()
+    
     init() {
         calendarData.requestAccessToCalendar()
     }
@@ -41,11 +43,7 @@ struct ContentView: View {
     
     private func validateRegex(_ reg: String) -> Bool {
         // TODO flesh this out
-        if (reg.count != 0) {
             return true
-        } else {
-            return false
-        }
     }
 
     var body: some View {
@@ -63,7 +61,8 @@ struct ContentView: View {
                         if (!validateRegex(searchRegex) || forCalendars.count == 0) {
                             return
                         }
-                        calendarData.getEventsWithTitleRegex(forCalendars: forCalendars, withStart: searchStartDate, withEnd: searchEndDate, withRegex: searchRegex)
+                        wordFreq = calendarData.makeBagOfWordsEventTitles(forCalendars: forCalendars, withStart: searchStartDate, withEnd: searchEndDate, withRegex: searchRegex) ?? [:]
+                        print(wordFreq)
                     }
                     .disableAutocorrection(true)
                 DatePicker(
@@ -75,6 +74,7 @@ struct ContentView: View {
                 )
                 VStack(
                     content: {
+                        // list of calendar toggles for search
                         // need to do foreach this way cause defaultCalendarEvents can change
                         ForEach(calendars.indices, id:\.self) { index in
                             Toggle(calendars[index].title, isOn: makeSearchCalendarBinding(index))
