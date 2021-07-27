@@ -100,6 +100,18 @@ struct CalendarData {
     }
     
     // func makeBagOfWordsEventTitleStart: word frequencies of the first word in the title
+    func makeBagOfWordsEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> Dictionary<String, Int>? {
+        guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
+            return nil
+        }
+        var bagOfWords = Dictionary<String, Int>()
+        for event in events {
+            let firstWord = String(event.title.split(separator: " ")[0])
+            bagOfWords[firstWord] = bagOfWords[firstWord] != nil ? bagOfWords[firstWord]! + 1 : 1
+        }
+        return bagOfWords
+    }
+    
     // func makeBagOfWordsNGram: frequencies of user-decided ngrams
     // func hardTitleFrequency: frequencies of the exact same title
     // func softTitleFrequency: frequencies of titles where the levenshtein distance is <= 1 or 2
@@ -111,5 +123,10 @@ struct CalendarData {
             total += abs(event.endDate.timeIntervalSince(event.startDate))
         }
         return total
+    }
+    
+    func sortDict(_ dict: Dictionary<String, Int>) -> Array<(String, Int)> {
+        // return a tuple of the dictionary sorted by the value
+        return dict.sorted { $0.1 < $1.1 }
     }
 }

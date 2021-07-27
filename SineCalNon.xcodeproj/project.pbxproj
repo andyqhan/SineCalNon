@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		92060D842639D6AD001922CC /* SineCalNonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D832639D6AD001922CC /* SineCalNonTests.swift */; };
 		92060D8F2639D6AE001922CC /* SineCalNonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */; };
 		920FC4AE2651D00900A66A9C /* GetCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920FC4AD2651D00900A66A9C /* GetCalendar.swift */; };
+		921D18F326B05931004780C8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 921D18F226B05931004780C8 /* SwiftUICharts */; };
+		921D18F526B05CE5004780C8 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D18F426B05CE5004780C8 /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineCalNonUITests.swift; sourceTree = "<group>"; };
 		92060D902639D6AE001922CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920FC4AD2651D00900A66A9C /* GetCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCalendar.swift; sourceTree = "<group>"; };
+		921D18F426B05CE5004780C8 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				921D18F326B05931004780C8 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +109,7 @@
 				92060D792639D6AC001922CC /* Info.plist */,
 				92060D7A2639D6AC001922CC /* SineCalNon.entitlements */,
 				92060D762639D6AC001922CC /* Preview Content */,
+				921D18F426B05CE5004780C8 /* Sidebar.swift */,
 			);
 			path = SineCalNon;
 			sourceTree = "<group>";
@@ -151,6 +156,9 @@
 			dependencies = (
 			);
 			name = SineCalNon;
+			packageProductDependencies = (
+				921D18F226B05931004780C8 /* SwiftUICharts */,
+			);
 			productName = SineCalNon;
 			productReference = 92060D6D2639D6A9001922CC /* SineCalNon.app */;
 			productType = "com.apple.product-type.application";
@@ -222,6 +230,9 @@
 				Base,
 			);
 			mainGroup = 92060D642639D6A9001922CC;
+			packageReferences = (
+				921D18F126B05931004780C8 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 92060D6E2639D6A9001922CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,6 +277,7 @@
 			files = (
 				92060D732639D6A9001922CC /* ContentView.swift in Sources */,
 				920FC4AE2651D00900A66A9C /* GetCalendar.swift in Sources */,
+				921D18F526B05CE5004780C8 /* Sidebar.swift in Sources */,
 				92060D712639D6A9001922CC /* SineCalNonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +593,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		921D18F126B05931004780C8 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		921D18F226B05931004780C8 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 921D18F126B05931004780C8 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 92060D652639D6A9001922CC /* Project object */;
 }
