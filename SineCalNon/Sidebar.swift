@@ -33,6 +33,7 @@ struct Sidebar: View {
             ) { isEditing in
                 // TODO put in like a company thing? or as-you-type results?
                 print("isEditing")
+                print(searchOptions)
             } onCommit: {
                 // TODO validate regex
                 let forCalendars : [EKCalendar] = (0 ..< searchOptions.availableCalendars.count).compactMap({ searchOptions.selectedCalendarsMask[$0] ? searchOptions.availableCalendars[$0] : nil })
@@ -59,7 +60,14 @@ struct Sidebar: View {
                         Toggle(searchOptions.availableCalendars[index].title, isOn: makeSearchCalendarBinding(index))
                     }
                 }
-            ).padding()
+            )
+            Button(action: {
+                print("button pressed")
+                searchOptions.key += 1  // we listen for this in ContentView. not very elegant, and not very swifty
+            }) {
+                Text("Refresh")
+            }
+            .padding()
         }.listStyle(SidebarListStyle())
     }
 }

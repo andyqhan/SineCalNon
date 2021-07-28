@@ -14,8 +14,21 @@ class SearchOptions: ObservableObject {
     @Published var startDate = Date()
     @Published var endDate = Date()
     @Published var availableCalendars = [EKCalendar]()
+    @Published var key: Int = 0
+    lazy var selectedCalendars: [EKCalendar] = {
+        (0 ..< self.availableCalendars.count).compactMap({ self.selectedCalendarsMask[$0] ? self.availableCalendars[$0] : nil })
+    }()
 }
 
+extension SearchOptions: Equatable {
+    static func == (lhs: SearchOptions, rhs: SearchOptions) -> Bool {
+        return
+            lhs.regex == rhs.regex &&
+            lhs.selectedCalendarsMask == rhs.selectedCalendarsMask &&
+            lhs.startDate == rhs.startDate &&
+            lhs.endDate == rhs.endDate
+    }
+}
 
 @main
 struct SineCalNonApp: App {
@@ -39,7 +52,8 @@ struct SineCalNonApp: App {
             NavigationView {
                 Sidebar(searchOptions: searchOptions)
             }
-            ContentView().onReceive(NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: calendarData.eventStore), perform: { _ in
+            ContentView(searchOptions: searchOptions)
+                .onReceive(NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: calendarData.eventStore), perform: { _ in
                 loadData()
             })
         }
