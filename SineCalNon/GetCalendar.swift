@@ -81,9 +81,9 @@ struct CalendarData {
             return matches.filter { $0.title?.range(of: reg, options: .regularExpression) != nil }
         }
     }
-
+    
     func makeBagOfWordsEventTitles(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> Dictionary<String, Int>? {
-         // return dictionary of word frequencies for selected events
+        // return dictionary of word frequencies for selected events
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
