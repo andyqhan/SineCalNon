@@ -125,8 +125,17 @@ struct CalendarData {
         return total
     }
     
-    func sortDict(_ dict: Dictionary<String, Int>) -> Array<(String, Int)> {
-        // return a tuple of the dictionary sorted by the value
-        return dict.sorted { $0.1 < $1.1 }
+    /// Sorts a dictionary by value for pasing to a ChartView.
+    /// - Parameters:
+    ///   - dict: Dictionary of keys and values. Generally will be the output of a makeBagOfWords function
+    ///   - dropThreshold: Float. Drop values equal to or below this number (default 0, which means no dropping).
+    /// - Returns: Array of tuples (key, value), sorted by the value.
+    func sortDict(_ dict: Dictionary<String, Int>, dropThreshold: Float = 0) -> Array<(String, Int)> {
+        // TODO make this O(nlogn) like a normal sort function
+        var newDict = dict
+        if dropThreshold > 0 {
+            newDict = dict.filter { Float($0.1) > dropThreshold }
+        }
+        return newDict.sorted { $0.1 < $1.1 }
     }
 }

@@ -14,7 +14,10 @@ class SearchOptions: ObservableObject {
     @Published var startDate = Date()
     @Published var endDate = Date()
     @Published var availableCalendars = [EKCalendar]()
+    @Published var dropThreshold: Float = 0
+    
     @Published var key: Int = 0
+    
     lazy var selectedCalendars: [EKCalendar] = {
         (0 ..< self.availableCalendars.count).compactMap({ self.selectedCalendarsMask[$0] ? self.availableCalendars[$0] : nil })
     }()
@@ -37,6 +40,7 @@ struct SineCalNonApp: App {
     
     init() {
         calendarData.requestAccessToCalendar()
+        loadData()
     }
     
     let pubCalendarAccess = NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: calendarData.eventStore)
@@ -51,11 +55,11 @@ struct SineCalNonApp: App {
         WindowGroup {
             NavigationView {
                 Sidebar(searchOptions: searchOptions)
+                ContentView(searchOptions: searchOptions)
+                    .onReceive(NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: calendarData.eventStore), perform: { _ in
+                    loadData()
+                })
             }
-            ContentView(searchOptions: searchOptions)
-                .onReceive(NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: calendarData.eventStore), perform: { _ in
-                loadData()
-            })
         }
     }
 }

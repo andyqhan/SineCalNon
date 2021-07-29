@@ -11,6 +11,7 @@ let calendarData = CalendarData()
 
 struct Sidebar: View {
     @ObservedObject var searchOptions: SearchOptions
+    @State var dropThreshold: String = "0"
     
     private func validateRegex(_ reg: String) -> Bool {
         // TODO flesh this out
@@ -40,10 +41,6 @@ struct Sidebar: View {
                 if (!validateRegex(searchOptions.regex) || forCalendars.count == 0) {
                     return
                 }
-                //wordFreqCar = calendarData.makeBagOfWordsEventTitleStart(forCalendars: forCalendars, withStart: searchStartDate, withEnd: searchEndDate, withRegex: searchRegex) ?? [:]
-                //print(calendarData.sortDict(wordFreqCar))
-                //wordFreqTitle = calendarData.makeBagOfWordsEventTitles(forCalendars: forCalendars, withStart: searchStartDate, withEnd: searchEndDate, withRegex: searchRegex) ?? [:]
-                //print(calendarData.sortDict(wordFreqTitle))
             }
             .disableAutocorrection(true)
             DatePicker(
@@ -61,6 +58,16 @@ struct Sidebar: View {
                     }
                 }
             )
+            TextField(
+                // TODO validate input here
+                "Don't show values below...",
+                text: $dropThreshold
+            ) { isEditing in
+                
+            } onCommit: {
+                print("setting dropThreshold to \(dropThreshold)")
+                searchOptions.dropThreshold = Float(dropThreshold) ?? 0
+            }
             Button(action: {
                 print("button pressed")
                 searchOptions.key += 1  // we listen for this in ContentView. not very elegant, and not very swifty
@@ -68,6 +75,7 @@ struct Sidebar: View {
                 Text("Refresh")
             }
             .padding()
-        }.listStyle(SidebarListStyle())
+        }
+        .listStyle(SidebarListStyle())
     }
 }
