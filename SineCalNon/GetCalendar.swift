@@ -82,13 +82,17 @@ struct CalendarData {
         }
     }
     
-    func makeBagOfWordsEventTitles(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> Dictionary<String, Int>? {
+    func makeBagOfWordsEventTitles(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Dictionary<String, Double>? {
         // return dictionary of word frequencies for selected events
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
-        var bagOfWords = Dictionary<String, Int>()
+        var bagOfWords = Dictionary<String, Double>()
         for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                // skip all-day events
+                continue
+            }
             let titleSplitArr = event.title.split(separator: " ")
             for word in titleSplitArr {
                 let word = String(word)
@@ -100,15 +104,37 @@ struct CalendarData {
     }
     
     // func makeBagOfWordsEventTitleStart: word frequencies of the first word in the title
-    func makeBagOfWordsEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> Dictionary<String, Int>? {
+    func makeBagOfWordsEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Dictionary<String, Double>? {
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
-        var bagOfWords = Dictionary<String, Int>()
+        var bagOfWords = Dictionary<String, Double>()
         for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                // skip all-day events
+                continue
+            }
             let firstWord = String(event.title.split(separator: " ")[0])
             bagOfWords[firstWord] = bagOfWords[firstWord] != nil ? bagOfWords[firstWord]! + 1 : 1
         }
+        return bagOfWords
+    }
+    
+    func makeBagOfWordDurationEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Dictionary<String, TimeInterval>? {
+        guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
+            return nil
+        }
+        var bagOfWords = Dictionary<String, TimeInterval>()
+        for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                // skip all-day events
+                continue
+            }
+            let firstWord = String(event.title.split(separator: " ")[0])
+            let thisInterval = abs(event.endDate.timeIntervalSince(event.startDate))  // TimeInterval is "always in seconds", according to docs
+            bagOfWords[firstWord] = bagOfWords[firstWord] != nil ? bagOfWords[firstWord]! + thisInterval : thisInterval
+        }
+        print("duration bag: \(bagOfWords)")
         return bagOfWords
     }
     
@@ -128,14 +154,21 @@ struct CalendarData {
     /// Sorts a dictionary by value for pasing to a ChartView.
     /// - Parameters:
     ///   - dict: Dictionary of keys and values. Generally will be the output of a makeBagOfWords function
-    ///   - dropThreshold: Float. Drop values equal to or below this number (default 0, which means no dropping).
+    ///   - dropThreshold: Double. Drop values equal to or below this number (default 0, which means no dropping).
     /// - Returns: Array of tuples (key, value), sorted by the value.
-    func sortDict(_ dict: Dictionary<String, Int>, dropThreshold: Float = 0) -> Array<(String, Int)> {
+    func sortDict(_ dict: Dictionary<String, Double>, dropThreshold: Double = 0, convertToHours: Bool = false) -> Array<(String, Double)> {
         // TODO make this O(nlogn) like a normal sort function
         var newDict = dict
-        if dropThreshold > 0 {
-            newDict = dict.filter { Float($0.1) > dropThreshold }
+        
+        if convertToHours {
+            // convert minutes to hours
+            newDict = newDict.mapValues { $0 / 60 / 60 }
         }
+        if dropThreshold > 0 {
+            // drop values less than the dropThreshold
+            newDict = newDict.filter { Double($0.1) > dropThreshold }
+        }
+        
         return newDict.sorted { $0.1 < $1.1 }
     }
 }

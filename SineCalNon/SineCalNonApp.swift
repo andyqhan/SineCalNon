@@ -14,7 +14,7 @@ class SearchOptions: ObservableObject {
     @Published var startDate = Date()
     @Published var endDate = Date()
     @Published var availableCalendars = [EKCalendar]()
-    @Published var dropThreshold: Float = 0
+    @Published var dropThreshold: Double = 0
     
     @Published var key: Int = 0
     
