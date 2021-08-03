@@ -8,6 +8,27 @@
 import Foundation
 import EventKit
 
+enum YAxis: String, CaseIterable, Identifiable {
+    // What the y-axis can measure. This is distinct from what the x-axis tracks, which right now is just bags of words (either regex match on the whole title or just first word). In future, x-axis can also be time durations (like months?) or something. Maybe make it totally custom and hardcoded.
+    case frequency
+    case duration
+
+    var id: String { self.rawValue }
+}
+
+enum XAxis: String, CaseIterable, Identifiable {
+    // What the x-axis can measure
+    case boWFirst  // a bag of words of the first word
+    case boWAll  // bag of words of all words (space-separated)
+    
+    case months
+    case daysOfMonth
+    case daysOfWeek
+    case hours
+    
+    var id: String { self.rawValue }
+}
+
 struct CalendarData {
     
     let eventStore = EKEventStore()
@@ -70,6 +91,33 @@ struct CalendarData {
     
     var defaultCalendarEvents: [EKEvent]?
     
+    func getData(_ searchOptions: SearchOptions, xaxis x: XAxis, yaxis y: YAxis, includeAllDayEvents: Bool = false) -> Array<(String, Double)>{
+        // Main entry point function, called from ContentView, that returns whatever data we need
+        let calendars = searchOptions.selectedCalendars
+        let start = searchOptions.startDate
+        let end = searchOptions.endDate
+        let reg = searchOptions.regex
+        
+    }
+    
+    func makeXAxis(xaxis x: XAxis, forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+        // Return list of list of EKEvents that fit this xaxis
+        switch x {
+        case .boWAll:
+            return makeXAxisEventTitlesAll(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, includeAllDayEvents: includeAllDayEvents)
+        case .boWFirst:
+            return makeXAxisEventTitleStart(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, includeAllDayEvents: includeAllDayEvents)
+        case .months:
+            return makeXAxisDateComponents(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, dateComponents: [.month])
+        default:
+            print("swift linter so annoying")
+            return [String: [EKEvent]]()
+//        case .daysOfWeek:
+//        case .daysOfMonth:
+//        case .hours:
+        }
+    }
+    
     func getEventsWithTitleRegex(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> [EKEvent]? {
         // reg is a String and not an NSRegularExpression cause working with that is horrible. downside is that i don't get like init checking for it here — will have to do in caller
         let evPred = eventStore.predicateForEvents(withStart: withStart, end: withEnd, calendars: calendars)
@@ -82,7 +130,77 @@ struct CalendarData {
         }
     }
     
+    func makeXAxisEventTitlesAll(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+        // return dictionary of word frequencies for selected events
+        guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
+            return nil
+        }
+        var bagOfWords = [String: [EKEvent]]()
+        for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                // skip all-day events
+                continue
+            }
+            let titleSplitArr = event.title.split(separator: " ")
+            for word in titleSplitArr {
+                let word = String(word)
+                // TODO add aliases: e.g., hh == hearhere
+                if bagOfWords[word] != nil {
+                    bagOfWords[word]!.append(event)
+                } else {
+                    bagOfWords[word] = [event]
+                }
+            }
+        }
+        return bagOfWords
+    }
+    
+    func makeXAxisEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+        guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
+            return nil
+        }
+        var bagOfWords = [String: [EKEvent]]()
+        for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                // skip all-day events
+                continue
+            }
+            let firstWord = String(event.title.split(separator: " ")[0])
+            if bagOfWords[firstWord] != nil {
+                bagOfWords[firstWord]!.append(event)
+            } else {
+                bagOfWords[firstWord] = [event]
+            }
+        }
+        return bagOfWords
+    }
+    
+    func makeXAxisDateComponents(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, dateComponents: Set<Calendar.Component>, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+        guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
+            return nil
+        }
+        var output = [String: [EKEvent]]()
+        let cal = Calendar.current
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        
+        for event in events {
+            if event.isAllDay && !includeAllDayEvents {
+                continue
+            }
+            let component = formatter.string(from: cal.dateComponents(dateComponents, from: event.startDate))!
+            if output[component] != nil {
+                output[component]!.append(event)
+            } else {
+                output[component] = [event]
+            }
+        }
+        return output
+    }
+    
+    
     func makeBagOfWordsEventTitles(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Dictionary<String, Double>? {
+        // DEPRECATED
         // return dictionary of word frequencies for selected events
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
@@ -105,6 +223,7 @@ struct CalendarData {
     
     // func makeBagOfWordsEventTitleStart: word frequencies of the first word in the title
     func makeBagOfWordsEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Dictionary<String, Double>? {
+        // DEPRECATED
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
