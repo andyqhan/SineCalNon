@@ -91,13 +91,17 @@ struct CalendarData {
     
     var defaultCalendarEvents: [EKEvent]?
     
-    func getData(_ searchOptions: SearchOptions, xaxis x: XAxis, yaxis y: YAxis, includeAllDayEvents: Bool = false) -> Array<(String, Double)>{
+    func getData(for searchOptions: SearchOptions, xaxis x: XAxis, yaxis y: YAxis, includeAllDayEvents: Bool = false) -> Array<(String, Double)>{
         // Main entry point function, called from ContentView, that returns whatever data we need
         let calendars = searchOptions.selectedCalendars
         let start = searchOptions.startDate
         let end = searchOptions.endDate
         let reg = searchOptions.regex
         
+        guard let xEvents = makeXAxis(xaxis: x, forCalendars: calendars, withStart: start, withEnd: end, withRegex: reg, includeAllDayEvents: includeAllDayEvents) else {
+            return Array<(String, Double)>()
+        }
+        return makeYAxis(forXEvents: xEvents, withYAxis: y)
     }
     
     func makeXAxis(xaxis x: XAxis, forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
@@ -109,13 +113,28 @@ struct CalendarData {
             return makeXAxisEventTitleStart(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, includeAllDayEvents: includeAllDayEvents)
         case .months:
             return makeXAxisDateComponents(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, dateComponents: [.month])
-        default:
-            print("swift linter so annoying")
-            return [String: [EKEvent]]()
-//        case .daysOfWeek:
-//        case .daysOfMonth:
-//        case .hours:
+        case .daysOfWeek:
+            return makeXAxisDateComponents(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, dateComponents: [.weekday])
+        case .daysOfMonth:
+            return makeXAxisDateComponents(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, dateComponents: [.day])
+        case .hours:
+            return makeXAxisDateComponents(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg, dateComponents: [.hour])
         }
+    }
+    
+    func makeYAxis(forXEvents x: [String: [EKEvent]], withYAxis y: YAxis) -> Array<(String, Double)> {
+        var output = Array<(String, Double)>()
+        switch y {
+        case .frequency:
+            for (name, events) in x {
+                output.append((name, Double(events.count)))
+            }
+        case .duration:
+            for (name, events) in x {
+                output.append((name, toHours(totalDuration(of: events))))
+            }
+        }
+        return output
     }
     
     func getEventsWithTitleRegex(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> [EKEvent]? {
@@ -180,21 +199,35 @@ struct CalendarData {
             return nil
         }
         var output = [String: [EKEvent]]()
+
         let cal = Calendar.current
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
+
+        let dateFormatter = DateFormatter()
+        if dateComponents == [.month] {
+            dateFormatter.dateFormat = "MMMM"
+        } else if dateComponents == [.day] {
+            dateFormatter.dateFormat = "dd"
+        } else if dateComponents == [.hour] {
+            dateFormatter.dateFormat = "HH"
+        } else if dateComponents == [.weekday] {
+            dateFormatter.dateFormat = "EEEE"
+        }
         
         for event in events {
             if event.isAllDay && !includeAllDayEvents {
                 continue
             }
-            let component = formatter.string(from: cal.dateComponents(dateComponents, from: event.startDate))!
+            //let component = formatter.string(from: cal.dateComponents(dateComponents, from: event.startDate))!
+            let component = dateFormatter.string(from: event.startDate)
             if output[component] != nil {
                 output[component]!.append(event)
             } else {
                 output[component] = [event]
             }
         }
+        // TODO needs to be sorted
+        
+        
         return output
     }
     
@@ -270,12 +303,16 @@ struct CalendarData {
         return total
     }
     
+    func toHours(_ time: TimeInterval) -> Double {
+        return time / 60 / 60
+    }
+    
     /// Sorts a dictionary by value for pasing to a ChartView.
     /// - Parameters:
     ///   - dict: Dictionary of keys and values. Generally will be the output of a makeBagOfWords function
     ///   - dropThreshold: Double. Drop values equal to or below this number (default 0, which means no dropping).
     /// - Returns: Array of tuples (key, value), sorted by the value.
-    func sortDict(_ dict: Dictionary<String, Double>, dropThreshold: Double = 0, convertToHours: Bool = false) -> Array<(String, Double)> {
+    func sortDictByValue(_ dict: Dictionary<String, Double>, dropThreshold: Double = 0, convertToHours: Bool = false) -> Array<(String, Double)> {
         // TODO make this O(nlogn) like a normal sort function
         var newDict = dict
         

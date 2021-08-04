@@ -20,13 +20,7 @@ struct ContentView: View {
     
     func refresh() {
         print("refresh called with yaxis \(yaxis) and xaxis \(xaxis)")
-//        switch yaxis {
-//        case .frequency:
-//            data = calendarData.sortDict(calendarData.makeBagOfWordsEventTitleStart(forCalendars: searchOptions.selectedCalendars, withStart: searchOptions.startDate, withEnd: searchOptions.endDate, withRegex: searchOptions.regex) ?? [:], dropThreshold: searchOptions.dropThreshold)
-//        case .duration:
-//            data = calendarData.sortDict(calendarData.makeBagOfWordDurationEventTitleStart(forCalendars: searchOptions.selectedCalendars, withStart: searchOptions.startDate, withEnd: searchOptions.endDate, withRegex: searchOptions.regex) ?? [:], dropThreshold: searchOptions.dropThreshold, convertToHours: true)
-//        }
-        data = calendarData.getData(searchOptions, xaxis: xaxis, yaxis: yaxis)
+        data = calendarData.getData(for: searchOptions, xaxis: xaxis, yaxis: yaxis)
         
         print(data)
     }
@@ -34,8 +28,8 @@ struct ContentView: View {
     var body: some View {
         HStack() {
             Picker("Y-axis", selection: $yaxis) {
-                Text("Frequency").tag(YAxis.frequency)
-                Text("Duration").tag(YAxis.duration)
+                Text("Frequency (count)").tag(YAxis.frequency)
+                Text("Duration (in hours)").tag(YAxis.duration)
             }
             Picker("X-axis", selection: $xaxis) {
                 Text("First word").tag(XAxis.boWFirst)
@@ -56,6 +50,9 @@ struct ContentView: View {
                 refresh()
             }
             .onChange(of: yaxis) { _ in
+                refresh()
+            }
+            .onChange(of: xaxis) { _ in
                 refresh()
             }
         }
