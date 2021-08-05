@@ -7,8 +7,8 @@
 
 import SwiftUI
 import EventKit
-import SwiftUICharts
-//import BarChart
+//import SwiftUICharts
+
 
 struct ContentView: View {
     @ObservedObject var searchOptions: SearchOptions
@@ -16,11 +16,11 @@ struct ContentView: View {
     @State var yaxis = YAxis.frequency
     @State var xaxis = XAxis.boWFirst
     
-    @State var data = Array<(String, Double)>()
+    //@State var data = ChartData(values: [("", 0)])
     
     func refresh() {
         print("refresh called with yaxis \(yaxis) and xaxis \(xaxis)")
-        data = calendarData.getData(for: searchOptions, xaxis: xaxis, yaxis: yaxis)
+        //data = ChartData(values: calendarData.getData(for: searchOptions, xaxis: xaxis, yaxis: yaxis))
         
         print(data)
     }
@@ -42,9 +42,7 @@ struct ContentView: View {
         }
         
         GeometryReader { geo in
-            List() {
-                BarChartView(data: ChartData(values: data), title: "Frequency of words in calendar event titles", form: CGSize(width: geo.size.width - 30, height: geo.size.height), dropShadow: false)
-            }
+            //BarChartView(data: data, title: "", form: CGSize(width: geo.size.width - 30, height: geo.size.height), dropShadow: false)
             .onChange(of: searchOptions.key) { _ in
                 print("onChange of searchOptions.key")
                 refresh()

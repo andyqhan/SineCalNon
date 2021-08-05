@@ -101,10 +101,10 @@ struct CalendarData {
         guard let xEvents = makeXAxis(xaxis: x, forCalendars: calendars, withStart: start, withEnd: end, withRegex: reg, includeAllDayEvents: includeAllDayEvents) else {
             return Array<(String, Double)>()
         }
-        return makeYAxis(forXEvents: xEvents, withYAxis: y)
+        return makeYAxis(forXEvents: xEvents, withYAxis: y, withXAxis: x, withDropThreshold: searchOptions.dropThreshold)
     }
     
-    func makeXAxis(xaxis x: XAxis, forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+    func makeXAxis(xaxis x: XAxis, forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Array<(String, [EKEvent])>? {
         // Return list of list of EKEvents that fit this xaxis
         switch x {
         case .boWAll:
@@ -122,19 +122,33 @@ struct CalendarData {
         }
     }
     
-    func makeYAxis(forXEvents x: [String: [EKEvent]], withYAxis y: YAxis) -> Array<(String, Double)> {
+    func makeYAxis(forXEvents x: Array<(String, [EKEvent])>, withYAxis yax: YAxis, withXAxis xax: XAxis, withDropThreshold drop: Double) -> Array<(String, Double)> {
         var output = Array<(String, Double)>()
-        switch y {
+        var shouldSortByY = false
+        if xax == .boWAll || xax == .boWFirst {
+            shouldSortByY = true
+        }
+        
+        switch yax {
         case .frequency:
             for (name, events) in x {
-                output.append((name, Double(events.count)))
+                if Double(events.count) > drop {
+                    output.append((name, Double(events.count)))
+                }
             }
         case .duration:
             for (name, events) in x {
-                output.append((name, toHours(totalDuration(of: events))))
+                if toHours(totalDuration(of: events)) > drop {
+                    output.append((name, toHours(totalDuration(of: events))))
+                }
             }
         }
-        return output
+        
+        if shouldSortByY {
+            return output.sorted { $0.1 > $1.1 }
+        } else {
+            return output
+        }
     }
     
     func getEventsWithTitleRegex(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String) -> [EKEvent]? {
@@ -149,7 +163,7 @@ struct CalendarData {
         }
     }
     
-    func makeXAxisEventTitlesAll(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+    func makeXAxisEventTitlesAll(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Array<(String, [EKEvent])>? {
         // return dictionary of word frequencies for selected events
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
@@ -171,10 +185,10 @@ struct CalendarData {
                 }
             }
         }
-        return bagOfWords
+        return bagOfWords.map { ($0.key, $0.value) }
     }
     
-    func makeXAxisEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+    func makeXAxisEventTitleStart(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, includeAllDayEvents: Bool = false) -> Array<(String, [EKEvent])>? {
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
@@ -191,26 +205,33 @@ struct CalendarData {
                 bagOfWords[firstWord] = [event]
             }
         }
-        return bagOfWords
+        return bagOfWords.map { ($0.key, $0.value) }
     }
     
-    func makeXAxisDateComponents(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, dateComponents: Set<Calendar.Component>, includeAllDayEvents: Bool = false) -> [String: [EKEvent]]? {
+    func makeXAxisDateComponents(forCalendars calendars: [EKCalendar], withStart: Date, withEnd: Date, withRegex reg: String, dateComponents: Set<Calendar.Component>, includeAllDayEvents: Bool = false) -> Array<(String, [EKEvent])>? {
         guard let events = getEventsWithTitleRegex(forCalendars: calendars, withStart: withStart, withEnd: withEnd, withRegex: reg) else {
             return nil
         }
         var output = [String: [EKEvent]]()
 
-        let cal = Calendar.current
-
         let dateFormatter = DateFormatter()
+        
+        var sortOrder = Array<String>()
+        var canSortByNumber = false
+        
         if dateComponents == [.month] {
             dateFormatter.dateFormat = "MMMM"
+            // TODO this is really hacky and really bad... won't work for non-US locales
+            sortOrder = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         } else if dateComponents == [.day] {
             dateFormatter.dateFormat = "dd"
+            canSortByNumber = true
         } else if dateComponents == [.hour] {
             dateFormatter.dateFormat = "HH"
+            canSortByNumber = true
         } else if dateComponents == [.weekday] {
             dateFormatter.dateFormat = "EEEE"
+            sortOrder = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         }
         
         for event in events {
@@ -225,10 +246,16 @@ struct CalendarData {
                 output[component] = [event]
             }
         }
-        // TODO needs to be sorted
         
-        
-        return output
+        if canSortByNumber {
+            return output.sorted {
+                Int($0.0)! < Int($1.0)!
+            }
+        } else {
+            return output.sorted {
+                return sortOrder.firstIndex(of: $0.key)! > sortOrder.firstIndex(of: $1.key)!
+            }
+        }
     }
     
     
