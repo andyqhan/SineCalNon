@@ -7,6 +7,7 @@
 
 import SwiftUI
 import EventKit
+import SwiftUICharts
 
 class SearchOptions: ObservableObject {
     @Published var regex = ""  // user input in text field
@@ -23,6 +24,10 @@ class SearchOptions: ObservableObject {
     }()
 }
 
+class SearchedChartData: ObservableObject {
+    @Published var chartData = ChartData(values: [("", 0)])
+}
+
 extension SearchOptions: Equatable {
     static func == (lhs: SearchOptions, rhs: SearchOptions) -> Bool {
         return
@@ -37,6 +42,7 @@ extension SearchOptions: Equatable {
 struct SineCalNonApp: App {
     //@State var calendars = [EKCalendar]()  // array of calendars in ekEventStore
     @StateObject var searchOptions = SearchOptions()
+    @StateObject var chartData = SearchedChartData()
     
     init() {
         calendarData.requestAccessToCalendar()
@@ -60,6 +66,7 @@ struct SineCalNonApp: App {
                     loadData()
                 })
             }
+            .environmentObject(chartData)
         }
     }
 }

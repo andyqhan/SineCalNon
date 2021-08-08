@@ -11,6 +11,7 @@ let calendarData = CalendarData()
 
 struct Sidebar: View {
     @ObservedObject var searchOptions: SearchOptions
+    @EnvironmentObject var chartData: SearchedChartData
     @State var dropThreshold: String = "0"
     
     private func validateRegex(_ reg: String) -> Bool {
@@ -78,12 +79,12 @@ struct Sidebar: View {
                     }
                 }
             )
-            Button(action: {
-                print("button pressed")
-                searchOptions.key += 1  // we listen for this in ContentView. not very elegant, and not very swifty
-            }) {
-                Text("Refresh")
-            }
+//            Button(action: {
+//                print("button pressed")
+//                searchOptions.key += 1  // we listen for this in ContentView. not very elegant, and not very swifty
+//            }) {
+//                Text("Refresh")
+//            }
             .padding()
         }
         .listStyle(SidebarListStyle())

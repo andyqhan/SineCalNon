@@ -15,9 +15,7 @@
 		92060D8F2639D6AE001922CC /* SineCalNonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92060D8E2639D6AE001922CC /* SineCalNonUITests.swift */; };
 		920FC4AE2651D00900A66A9C /* GetCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920FC4AD2651D00900A66A9C /* GetCalendar.swift */; };
 		921D18F526B05CE5004780C8 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921D18F426B05CE5004780C8 /* Sidebar.swift */; };
-		92DBC91126BC3FBF0077C83E /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 92DBC91026BC3FBF0077C83E /* Charts */; };
-		92DBC91326BC3FBF0077C83E /* ChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 92DBC91226BC3FBF0077C83E /* ChartsDynamic */; };
-		92DBC91426BC3FBF0077C83E /* ChartsDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 92DBC91226BC3FBF0077C83E /* ChartsDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9233B29326C0298100FFD746 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 9233B29226C0298100FFD746 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +42,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				92DBC91426BC3FBF0077C83E /* ChartsDynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,8 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92DBC91126BC3FBF0077C83E /* Charts in Frameworks */,
-				92DBC91326BC3FBF0077C83E /* ChartsDynamic in Frameworks */,
+				9233B29326C0298100FFD746 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,8 +171,7 @@
 			);
 			name = SineCalNon;
 			packageProductDependencies = (
-				92DBC91026BC3FBF0077C83E /* Charts */,
-				92DBC91226BC3FBF0077C83E /* ChartsDynamic */,
+				9233B29226C0298100FFD746 /* SwiftUICharts */,
 			);
 			productName = SineCalNon;
 			productReference = 92060D6D2639D6A9001922CC /* SineCalNon.app */;
@@ -250,7 +245,7 @@
 			);
 			mainGroup = 92060D642639D6A9001922CC;
 			packageReferences = (
-				92DBC90F26BC3FBF0077C83E /* XCRemoteSwiftPackageReference "Charts" */,
+				9233B29126C0298100FFD746 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 92060D6E2639D6A9001922CC /* Products */;
 			projectDirPath = "";
@@ -614,26 +609,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		92DBC90F26BC3FBF0077C83E /* XCRemoteSwiftPackageReference "Charts" */ = {
+		9233B29126C0298100FFD746 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts";
+			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
+				minimumVersion = 1.5.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		92DBC91026BC3FBF0077C83E /* Charts */ = {
+		9233B29226C0298100FFD746 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 92DBC90F26BC3FBF0077C83E /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
-		};
-		92DBC91226BC3FBF0077C83E /* ChartsDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 92DBC90F26BC3FBF0077C83E /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = ChartsDynamic;
+			package = 9233B29126C0298100FFD746 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

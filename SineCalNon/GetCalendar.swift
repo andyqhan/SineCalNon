@@ -253,7 +253,7 @@ struct CalendarData {
             }
         } else {
             return output.sorted {
-                return sortOrder.firstIndex(of: $0.key)! > sortOrder.firstIndex(of: $1.key)!
+                return sortOrder.firstIndex(of: $0.key)! < sortOrder.firstIndex(of: $1.key)!
             }
         }
     }
