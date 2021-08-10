@@ -15,30 +15,14 @@ struct ContentView: View {
     @EnvironmentObject var chartData: SearchedChartData
     
     @State var yaxis = YAxis.frequency
-    @State var xaxis = XAxis.boWFirst
     
     @State var data = ChartData(values: [("", 0)])
-    
-    func refresh() {
-        print("refresh called with yaxis \(yaxis) and xaxis \(xaxis)")
-        //data = ChartData(values: calendarData.getData(for: searchOptions, xaxis: xaxis, yaxis: yaxis))
-        
-        //print(self.data)
-    }
     
     var body: some View {
         HStack() {
             Picker("Y-axis", selection: $yaxis) {
                 Text("Frequency (count)").tag(YAxis.frequency)
                 Text("Duration (in hours)").tag(YAxis.duration)
-            }
-            Picker("X-axis", selection: $xaxis) {
-                Text("First word").tag(XAxis.boWFirst)
-                Text("All words").tag(XAxis.boWAll)
-                Text("Months").tag(XAxis.months)
-                Text("Days of month").tag(XAxis.daysOfMonth)
-                Text("Days of week").tag(XAxis.daysOfWeek)
-                Text("Hours").tag(XAxis.hours)
             }
         }
         

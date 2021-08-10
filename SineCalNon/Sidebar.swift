@@ -56,14 +56,12 @@ struct Sidebar: View {
                 "End date",
                 selection: $searchOptions.endDate
             )
-            VStack(
-                content: {
+            VStack(alignment: .leading) {
                     // list of calendar toggles for search
                     ForEach(searchOptions.availableCalendars.indices, id:\.self) { index in
                         Toggle(searchOptions.availableCalendars[index].title, isOn: makeSearchCalendarBinding(index))
                     }
                 }
-            )
             HStack(
                 content: {
                     Text("Threshold")
