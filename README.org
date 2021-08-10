@@ -1,4 +1,43 @@
 #+TITLE: SineCalNon
 
-* Features:
-- [ ] Simple hour counter. You put in a regex and it tells you how many hours you spent on it in the past week, month, year.
+[[file:./images/hours.gif]]
+
+SineCalNon (from sine qua non) is an app for macOS, written in Swift and SwiftUI. I made it because I use my calendar a little bit too much—I like to minimize the amount of time that doesn't have an event on it, so that I can track how I spend my time. The data's always been there for me to analyze, and this app is my way of analyzing it.
+
+You can use a regex to narrow down what events show on the graphs. The x-axis is controlled by the tabs at the top, and the y-axis is controlled by the dropdown.
+
+Generally, the distribution of both frequency and duration with an x-axis of first word or all words (first word is the first string before a space; all words creates a new x-value for each space-separated word in the events) is geometric.
+
+[[file:./images/fw_freq]]
+
+There's also support for x-axes of months, days of the week, days of the month, and hours of the day. Here's months:
+
+[[file:./images/months_freq]]
+
+* Example usage: reading
+
+Okay, so I read a lot. Maybe a little too much. Let's say I want to use SineCalNon to analyze my reading habits. First, I type "read" into the regex box, since I always preface my reading events in my calendar with "read."
+
+[[file:./images/read_anna_karenina]]
+
+This is the "all words" view. (The "first word" view is going to be pretty useless, since the vast majority of events which match the regex "read" will start with "read," at least in my calendar system.) Notice that I have the y-axis set to duration. This means that SineCalNon will find all the unique words used in all the event titles that match the regex "read." Then, it will compute the combined duration of the events containing each word, and graph it here.
+
+I've set the threshold to 1, so any x-values with a y-value of less than 1 will not be shown. In this case, that means that any words which appear in events whose summed duration is less than one hour will not be shown.
+
+You can hover over a data point to see the value behind the visual. I wanted, in this case, to see how much time I spent reading Tolstoy's magnificent /Anna Karenina/ this summer (I started it in June and finished in early August). So I find the word "karenina" (I know that every time I read the book, I recorded it as "read anna karenina"), and SineCalNon tells me that I spent 30.5 hours on the book. Those were some well-spent hours.
+
+But let's say that I want to know how much time I spent reading in total. Then, I'd find the "read" x-value on the same graph, and it tells me I've spent about 614 hours reading over the past two years, assuming that I recorded it in my calendar every time.
+
+[[file:./images/read_detail]]
+
+I'm also curious about not only how /long/ I read, but /when/ I read. We can use the hours view to look at that. So, graphing duration versus hours, I get this chart:
+
+[[file:./images/read_hours_duration]]
+
+As expected, I often start and end my day with reading, but I don't read as much in the middle of the day.
+
+With hours, it turns out that for me the duration and the frequency are very different. Here's frequency versus hours:
+
+[[file:./images/read_hours_freq]]
+
+You can see that there's a pronounced spike  at the beginning of the day. Those are 5 AM and 6 AM, and they're there because I always read for at least 15 minutes over coffee every morning. I don't read for very long, though, which is why in the duration graph, the spike is not as pronounced.
