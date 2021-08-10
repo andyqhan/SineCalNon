@@ -8,17 +8,17 @@ You can use a regex to narrow down what events show on the graphs. The x-axis is
 
 Generally, the distribution of both frequency and duration with an x-axis of first word or all words (first word is the first string before a space; all words creates a new x-value for each space-separated word in the events) is geometric.
 
-[[file:./images/fw_freq]]
+[[file:./images/fw_freq.png]]
 
 There's also support for x-axes of months, days of the week, days of the month, and hours of the day. Here's months:
 
-[[file:./images/months_freq]]
+[[file:./images/months_freq.png]]
 
 * Example usage: reading
 
 Okay, so I read a lot. Maybe a little too much. Let's say I want to use SineCalNon to analyze my reading habits. First, I type "read" into the regex box, since I always preface my reading events in my calendar with "read."
 
-[[file:./images/read_anna_karenina]]
+[[file:./images/read_anna_karenina.png]]
 
 This is the "all words" view. (The "first word" view is going to be pretty useless, since the vast majority of events which match the regex "read" will start with "read," at least in my calendar system.) Notice that I have the y-axis set to duration. This means that SineCalNon will find all the unique words used in all the event titles that match the regex "read." Then, it will compute the combined duration of the events containing each word, and graph it here.
 
@@ -28,16 +28,16 @@ You can hover over a data point to see the value behind the visual. I wanted, in
 
 But let's say that I want to know how much time I spent reading in total. Then, I'd find the "read" x-value on the same graph, and it tells me I've spent about 614 hours reading over the past two years, assuming that I recorded it in my calendar every time.
 
-[[file:./images/read_detail]]
+[[file:./images/read_detail.png]]
 
 I'm also curious about not only how /long/ I read, but /when/ I read. We can use the hours view to look at that. So, graphing duration versus hours, I get this chart:
 
-[[file:./images/read_hours_duration]]
+[[file:./images/read_hours_duration.png]]
 
 As expected, I often start and end my day with reading, but I don't read as much in the middle of the day.
 
 With hours, it turns out that for me the duration and the frequency are very different. Here's frequency versus hours:
 
-[[file:./images/read_hours_freq]]
+[[file:./images/read_hours_freq.png]]
 
 You can see that there's a pronounced spike  at the beginning of the day. Those are 5 AM and 6 AM, and they're there because I always read for at least 15 minutes over coffee every morning. I don't read for very long, though, which is why in the duration graph, the spike is not as pronounced.
